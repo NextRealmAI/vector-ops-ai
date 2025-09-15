@@ -32,7 +32,7 @@ vector-ops-ai/
    ```bash
    git clone https://github.com/your-handle/vector-ops-ai.git
    cd vector-ops-ai
-```
+
    
 Install dependencies:
 
