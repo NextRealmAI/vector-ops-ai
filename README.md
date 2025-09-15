@@ -47,6 +47,8 @@ Add your OpenAI API key:
 
 export OPENAI_API_KEY="your_key_here"
 Run the app:
+```
+
 
 ```bash
 
@@ -57,6 +59,8 @@ Streamlit Cloud → fastest way to share demo
 Replit → easy browser deployment
 
 Vercel/Render → production-grade hosting
+```
+
 
 ```bash
 🎯 Roadmap
@@ -67,10 +71,11 @@ Vercel/Render → production-grade hosting
  Prebuilt compliance/risk analysis prompts
 
  Role-based agent modes (Analyst / Auditor / Researcher)
-
+```
 
 ```bash
 ⚠️ Disclaimer
 
 This project is an MVP prototype.
 Not legal, financial, or compliance advice. Use at your own risk.
+```
