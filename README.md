@@ -34,17 +34,17 @@ vector-ops-ai/
    cd vector-ops-ai
 Install dependencies:
 
-bash
+```bash
 
 pip install -r requirements.txt
 Add your OpenAI API key:
 
-bash
+```bash
 
 export OPENAI_API_KEY="your_key_here"
 Run the app:
 
-bash
+```bash
 
 streamlit run main.py
 📦 Deployment
@@ -54,6 +54,7 @@ Replit → easy browser deployment
 
 Vercel/Render → production-grade hosting
 
+```bash
 🎯 Roadmap
  Multi-file PDF support
 
@@ -63,6 +64,8 @@ Vercel/Render → production-grade hosting
 
  Role-based agent modes (Analyst / Auditor / Researcher)
 
+
+```bash
 ⚠️ Disclaimer
 
 This project is an MVP prototype.
