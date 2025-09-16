@@ -1,83 +1,93 @@
-# 🛰️ Vector Ops AI
+# 🛰️ Vector-Ops-AI
 
-⚔️ **Vector Ops AI** is a lightweight agent for **document intelligence**.  
-Upload a PDF → the agent chunks it, embeds into a vector DB, and lets you query with natural language.  
-Perfect for compliance, risk analysis, and research workflows.
-
----
-
-## 🔧 Features
-- 📑 PDF ingestion + intelligent chunking
-- 🧠 GPT-powered summarization & Q&A
-- 🗂️ Vector search with FAISS
-- 🖥️ Streamlit interface for fast testing + deployment
-- 🚀 Deployable on Replit, Vercel, or Streamlit Cloud
+**Vector-Ops-AI** is an experimental AI agent that ingests long PDF reports and produces **action-oriented summaries** using **Google Gemini**.  
+Designed for banking/compliance analysts, researchers, and operators who need rapid signal extraction from dense documents.
 
 ---
 
-## 📂 Repo Structure
+## 🚀 Features
+- 📂 Upload and parse PDF reports  
+- 🔎 Chunk text + retrieve relevant sections with cosine similarity (TF-IDF)  
+- 🤖 Summarize content using **Gemini 1.5 Pro** (`google-generativeai`)  
+- 🎯 Generate concise, structured insights from dense data  
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/<your-username>/vector-ops-ai.git
+cd vector-ops-ai
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate   # On Linux/Mac
+venv\Scripts\activate      # On Windows
+
+# Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+```bash
+
+🔑 Setup
+
+Copy .env.example to .env:
+
+cp .env.example .env
+
+
+Add your Gemini API key (from Google AI Studio):
+
+GEMINI_API_KEY=your_api_key_here
+LOG_LEVEL=INFO
+
+🛠️ Usage
+
+Run a query against a PDF:
+
+python main.py --pdf ./sample_docs/report.pdf --query "What are the compliance risks?"
+
+
+Example output:
+
+[INFO] Loading PDF...
+[INFO] Chunking into 12 sections...
+[INFO] Running query: compliance risks
+[INFO] Summarizing with Gemini...
+[OUTPUT] 
+1. Risk of AML non-compliance in transaction monitoring
+2. Weakness in data retention policies
+3. Recommendation: Update KYC processes quarterly
+
+📂 Project Structure
 vector-ops-ai/
 │
 ├── main.py          # CLI entry point
-├── agent.py         # Handles document ingestion + retrieval
+├── agent.py         # Handles PDF ingestion + retrieval
 ├── summarizer.py    # Gemini summarization logic
-├── requirements.txt # Python dependencies
-├── .env.example     # Example env vars
+├── requirements.txt # Dependencies
+├── .env.example     # Environment variable template
 └── README.md
 
+⚡ Roadmap
 
----
+ Add Streamlit/Gradio UI
 
-## 🚀 Quickstart
+ Support DOCX/HTML input
 
-1. **Clone this repo:**
-   ```bash
-   git clone https://github.com/your-handle/vector-ops-ai.git
-   cd vector-ops-ai
+ Export summaries → Markdown/Notion
 
-   
-Install dependencies:
+🕶️ Disclaimer
 
-```bash
+This is an experimental tool. Validate outputs before using in production compliance/legal workflows.
+AI is an assistant — you are the final authority.
 
-pip install -r requirements.txt
-Add your OpenAI API key:
-```
+👤 Author
 
+Maintained by a pseudonymous operator of Vector-Ops-AI.
+Building AI agents, wealth ops, and sovereign systems.
+Follow the mission logs for updates.
 
-```bash
-
-export OPENAI_API_KEY="your_key_here"
-Run the app:
-```
-
-
-```bash
-
-streamlit run main.py
-📦 Deployment
-Streamlit Cloud → fastest way to share demo
-
-Replit → easy browser deployment
-
-Vercel/Render → production-grade hosting
-```
-
-
-```bash
-🎯 Roadmap
- Multi-file PDF support
-
- Excel/Word export of summaries
-
- Prebuilt compliance/risk analysis prompts
-
- Role-based agent modes (Analyst / Auditor / Researcher)
-```
-
-```bash
-⚠️ Disclaimer
-
-This project is an MVP prototype.
-Not legal, financial, or compliance advice. Use at your own risk.
 ```
