@@ -17,12 +17,14 @@ Perfect for compliance, risk analysis, and research workflows.
 
 ## 📂 Repo Structure
 vector-ops-ai/
-│── main.py # Streamlit UI entrypoint
-│── agent.py # Agent orchestration
-│── summarizer.py # Summarization + Q&A logic
-│── requirements.txt # Dependencies
-│── .gitignore # Ignore cache/temp
-│── README.md # Project overview
+│
+├── main.py          # CLI entry point
+├── agent.py         # Handles document ingestion + retrieval
+├── summarizer.py    # Gemini summarization logic
+├── requirements.txt # Python dependencies
+├── .env.example     # Example env vars
+└── README.md
+
 
 ---
 
