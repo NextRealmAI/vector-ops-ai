@@ -1,6 +1,15 @@
 streamlit
-langchain
-openai
 pypdf
-faiss-cpu
-tiktoken
+
+# Core PDF + NLP stack
+PyPDF2==3.0.1
+scikit-learn==1.5.1
+
+# Google Gemini API client
+google-generativeai==0.7.2
+
+# Environment + logging
+python-dotenv==1.0.1
+
+# Optional: CLI logging colors (nice-to-have for dev)
+rich==13.7.1
