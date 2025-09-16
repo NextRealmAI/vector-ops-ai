@@ -1,14 +1,11 @@
-from summarizer import PDFSummarizer
+import google.generativeai as genai
 
-class ComplianceAgent:
-    def __init__(self):
-        self.summarizer = PDFSummarizer()
+genai.configure(api_key="your_key_here")
 
-    def process(self, pdf_file, query: str) -> str:
-        """
-        Orchestrates PDF processing and Q&A.
-        """
-        try:
-            return self.summarizer.answer_question(pdf_file, query)
-        except Exception as e:
-            return f"⚠️ Error: {str(e)}"
+def create_agent(text_chunks):
+    model = genai.GenerativeModel("gemini-1.5-pro")
+    def run(query):
+        prompt = f"Context:\n{text_chunks}\n\nQuestion: {query}"
+        response = model.generate_content(prompt)
+        return response.text
+    return type("Agent", (), {"run": run})()
