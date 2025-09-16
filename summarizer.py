@@ -5,7 +5,7 @@ summarizer.py — Pure Gemini implementation for Vector-Ops-AI
 This module handles text summarization & Q&A without LangChain.
 It uses Google Gemini's SDK directly for flexible document intelligence.
 
-Author: Operative Omega-7
+Author: Next Realm AI
 """
 
 import os
@@ -67,3 +67,4 @@ if __name__ == "__main__":
         "AI-driven compliance tools reduce human errors in reporting.",
     ]
     print(summarize_text(test_chunks, query="Summarize key points."))
+
