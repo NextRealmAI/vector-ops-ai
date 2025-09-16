@@ -1,33 +1,69 @@
+"""
+summarizer.py — Pure Gemini implementation for Vector-Ops-AI
+============================================================
+
+This module handles text summarization & Q&A without LangChain.
+It uses Google Gemini's SDK directly for flexible document intelligence.
+
+Author: Operative Omega-7
+"""
+
 import os
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
-from langchain.vectorstores import FAISS
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.chains import ConversationalRetrievalChain
-from langchain.document_loaders import PyPDFLoader
+import google.generativeai as genai
+from dotenv import load_dotenv
 
-class PDFSummarizer:
-    def __init__(self):
-        self.embeddings = OpenAIEmbeddings()
-        self.llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+# Load environment variables
+load_dotenv()
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-    def answer_question(self, pdf_file, query: str) -> str:
-        # Save uploaded file temporarily
-        temp_path = "temp.pdf"
-        with open(temp_path, "wb") as f:
-            f.write(pdf_file.getbuffer())
+if not GEMINI_API_KEY:
+    raise ValueError("❌ Missing GEMINI_API_KEY in environment variables.")
 
-        # Load and split
-        loader = PyPDFLoader(temp_path)
-        docs = loader.load()
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-        chunks = text_splitter.split_documents(docs)
+# Configure Gemini
+genai.configure(api_key=GEMINI_API_KEY)
 
-        # Vector store
-        vectorstore = FAISS.from_documents(chunks, self.embeddings)
-        retriever = vectorstore.as_retriever()
 
-        # Conversational chain
-        qa_chain = ConversationalRetrievalChain.from_llm(self.llm, retriever)
-        result = qa_chain.run(query)
+def summarize_text(chunks: list[str], query: str = "Summarize this document."):
+    """
+    Summarize or answer questions from document chunks using Gemini.
 
-        return result
+    Args:
+        chunks (list[str]): List of text chunks from a document.
+        query (str): User query, e.g., "Summarize", "Extract key risks".
+
+    Returns:
+        str: AI-generated summary or answer.
+    """
+    model = genai.GenerativeModel("gemini-1.5-pro")
+
+    # Build context from chunks
+    context = "\n\n".join(chunks[:20])  # limit first 20 chunks for token safety
+
+    prompt = f"""
+You are an AI Document Intelligence Agent.
+Context:
+{context}
+
+Task:
+{query}
+
+Rules:
+- Keep output concise but informative.
+- If asked for summary, provide bullet points + short abstract.
+- If asked a question, cite relevant context.
+"""
+
+    try:
+        response = model.generate_content(prompt)
+        return response.text.strip()
+    except Exception as e:
+        return f"⚠️ Gemini API Error: {str(e)}"
+
+
+# Debugging hook
+if __name__ == "__main__":
+    test_chunks = [
+        "This is a dummy text about AI agents revolutionizing finance.",
+        "AI-driven compliance tools reduce human errors in reporting.",
+    ]
+    print(summarize_text(test_chunks, query="Summarize key points."))
